@@ -1,8 +1,4 @@
 /* =========================
-   BASIC RESET
-========================= */
-
-/* =========================
    RESET
 ========================= */
 
@@ -19,15 +15,17 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
-    color: #ffffff;
+    color: white;
     overflow-x: hidden;
 
     background:
-        linear-gradient(135deg,
-            #00111a,
-            #002b36,
-            #003f4a,
-            #001a2e);
+        linear-gradient(
+            135deg,
+            #020617,
+            #0b1035,
+            #1e0b3d,
+            #071c38
+        );
 }
 
 
@@ -49,9 +47,11 @@ body {
     inset: 0;
 
     background:
-        radial-gradient(circle at 50% 20%,
-            rgba(0, 255, 255, 0.16),
-            transparent 40%);
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(0, 200, 255, 0.12),
+            transparent 35%
+        );
 
     animation: backgroundPulse 8s ease-in-out infinite alternate;
 }
@@ -60,14 +60,14 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(70px);
-    opacity: 0.45;
+    opacity: 0.5;
     animation: floatOrb 12s ease-in-out infinite alternate;
 }
 
 .orb-one {
     width: 330px;
     height: 330px;
-    background: #00e5ff;
+    background: #7c3aed;
     top: 5%;
     left: -80px;
 }
@@ -75,7 +75,7 @@ body {
 .orb-two {
     width: 300px;
     height: 300px;
-    background: #0077ff;
+    background: #0284c7;
     top: 35%;
     right: -80px;
     animation-delay: 2s;
@@ -84,7 +84,7 @@ body {
 .orb-three {
     width: 280px;
     height: 280px;
-    background: #00ffa3;
+    background: #db2777;
     bottom: -80px;
     left: 35%;
     animation-delay: 4s;
@@ -124,14 +124,14 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    border: 1px solid rgba(0, 229, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 22px;
 
-    background: rgba(0, 20, 30, 0.72);
+    background: rgba(10, 15, 40, 0.62);
     backdrop-filter: blur(20px);
 
     box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.3);
+        0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
 .brand {
@@ -154,13 +154,15 @@ body {
     font-weight: bold;
 
     background:
-        linear-gradient(135deg,
-            #00e5ff,
-            #0077ff,
-            #00ffa3);
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
 
     box-shadow:
-        0 0 28px rgba(0, 229, 255, 0.55);
+        0 0 25px rgba(124, 58, 237, 0.5);
 }
 
 .brand-text h2 {
@@ -169,11 +171,11 @@ body {
 
 .brand-text h2 span,
 .footer-logo span {
-    color: #00e5ff;
+    color: #67e8f9;
 }
 
 .brand-text small {
-    color: #8baeb8;
+    color: #94a3b8;
     font-size: 11px;
 }
 
@@ -190,10 +192,10 @@ body {
     width: 45px;
     height: 45px;
 
-    border: 1px solid rgba(0, 229, 255, 0.25);
+    border: 1px solid rgba(255,255,255,0.15);
     border-radius: 14px;
 
-    background: rgba(0, 229, 255, 0.08);
+    background: rgba(255,255,255,0.08);
     color: white;
 
     font-size: 28px;
@@ -204,7 +206,7 @@ body {
 }
 
 .menu-btn:hover {
-    background: rgba(0, 229, 255, 0.2);
+    background: rgba(255,255,255,0.18);
     transform: rotate(90deg);
 }
 
@@ -219,14 +221,13 @@ body {
 
     display: none;
 
-    border: 1px solid rgba(0, 229, 255, 0.25);
+    border: 1px solid rgba(255,255,255,0.15);
     border-radius: 18px;
 
-    background: rgba(0, 25, 35, 0.96);
+    background: rgba(10, 15, 40, 0.95);
     backdrop-filter: blur(20px);
 
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 
     z-index: 100;
 }
@@ -267,7 +268,7 @@ body {
 }
 
 .dropdown-menu button:hover {
-    background: rgba(0, 229, 255, 0.14);
+    background: rgba(96, 165, 250, 0.18);
     padding-left: 17px;
 }
 
@@ -289,7 +290,7 @@ main {
 
 .hero-badge,
 .section-label {
-    color: #00e5ff;
+    color: #67e8f9;
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 3px;
@@ -301,10 +302,10 @@ main {
     padding: 9px 16px;
     margin-bottom: 18px;
 
-    border: 1px solid rgba(0, 229, 255, 0.3);
+    border: 1px solid rgba(103,232,249,0.25);
     border-radius: 30px;
 
-    background: rgba(0, 229, 255, 0.08);
+    background: rgba(103,232,249,0.07);
 }
 
 h1 {
@@ -314,11 +315,13 @@ h1 {
     letter-spacing: -3px;
 
     background:
-        linear-gradient(90deg,
+        linear-gradient(
+            90deg,
             #ffffff,
-            #00e5ff,
-            #00aaff,
-            #00ffa3);
+            #67e8f9,
+            #a78bfa,
+            #f9a8d4
+        );
 
     -webkit-background-clip: text;
     background-clip: text;
@@ -334,7 +337,7 @@ h1 span {
 
     margin: 22px auto 0;
 
-    color: #b7d5dc;
+    color: #cbd5e1;
     font-size: 17px;
     line-height: 1.6;
 }
@@ -355,16 +358,16 @@ h1 span {
     display: flex;
     align-items: center;
 
-    border: 1px solid rgba(0, 229, 255, 0.45);
+    border: 1px solid rgba(103,232,249,0.45);
     border-radius: 40px;
 
-    background: rgba(0, 25, 40, 0.78);
+    background: rgba(10,20,50,0.7);
 
     backdrop-filter: blur(20px);
 
     box-shadow:
-        0 0 30px rgba(0, 229, 255, 0.18),
-        0 0 60px rgba(0, 119, 255, 0.12);
+        0 0 30px rgba(14,165,233,0.18),
+        0 0 60px rgba(139,92,246,0.12);
 }
 
 .search-icon {
@@ -391,7 +394,7 @@ h1 span {
 }
 
 .search-box input::placeholder {
-    color: #66858e;
+    color: #64748b;
 }
 
 .search-box button {
@@ -403,12 +406,14 @@ h1 span {
     border-radius: 30px;
 
     background:
-        linear-gradient(90deg,
-            #00e5ff,
-            #0077ff,
-            #00ffa3);
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
 
-    color: #001014;
+    color: white;
 
     font-weight: bold;
     font-size: 15px;
@@ -422,13 +427,13 @@ h1 span {
     transform: scale(1.04);
 
     box-shadow:
-        0 0 28px rgba(0, 229, 255, 0.65);
+        0 0 25px rgba(168,85,247,0.6);
 }
 
 .hint {
     margin-top: 14px;
 
-    color: #66858e;
+    color: #64748b;
     font-size: 12px;
 }
 
@@ -458,10 +463,10 @@ h1 span {
 .quick-links button {
     min-height: 105px;
 
-    border: 1px solid rgba(0, 229, 255, 0.12);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 18px;
 
-    background: rgba(0, 30, 45, 0.62);
+    background: rgba(20,30,65,0.55);
 
     color: white;
 
@@ -475,13 +480,13 @@ h1 span {
 .quick-links button:hover {
     transform: translateY(-8px);
 
-    border-color: rgba(0, 229, 255, 0.5);
+    border-color: rgba(103,232,249,0.45);
 
-    background: rgba(0, 55, 70, 0.78);
+    background: rgba(40,55,100,0.75);
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(0, 229, 255, 0.18);
+        0 10px 30px rgba(0,0,0,0.25),
+        0 0 20px rgba(59,130,246,0.18);
 }
 
 .site-icon {
@@ -497,18 +502,20 @@ h1 span {
     border-radius: 13px;
 
     background:
-        linear-gradient(135deg,
-            rgba(0, 229, 255, 0.22),
-            rgba(0, 119, 255, 0.28));
+        linear-gradient(
+            135deg,
+            rgba(6,182,212,0.25),
+            rgba(124,58,237,0.3)
+        );
 
     font-size: 20px;
     font-weight: bold;
 }
 
-.quick-links button>span:last-child {
+.quick-links button > span:last-child {
     display: block;
     font-size: 12px;
-    color: #b7d5dc;
+    color: #cbd5e1;
 }
 
 
@@ -524,15 +531,15 @@ h1 span {
 
     padding: 28px;
 
-    border: 1px solid rgba(0, 229, 255, 0.14);
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 24px;
 
-    background: rgba(0, 25, 40, 0.65);
+    background: rgba(10,20,50,0.58);
 
     backdrop-filter: blur(18px);
 
     box-shadow:
-        0 15px 50px rgba(0, 0, 0, 0.25);
+        0 15px 50px rgba(0,0,0,0.2);
 }
 
 .section-header {
@@ -553,10 +560,10 @@ h1 span {
 .clear-btn {
     padding: 9px 14px;
 
-    border: 1px solid rgba(255, 80, 80, 0.3);
+    border: 1px solid rgba(248,113,113,0.3);
     border-radius: 12px;
 
-    background: rgba(255, 60, 60, 0.12);
+    background: rgba(239,68,68,0.12);
 
     color: white;
 
@@ -564,7 +571,7 @@ h1 span {
 }
 
 .clear-btn:hover {
-    background: rgba(255, 60, 60, 0.3);
+    background: rgba(239,68,68,0.3);
 }
 
 .history-list {
@@ -582,7 +589,7 @@ h1 span {
 
     border-radius: 14px;
 
-    background: rgba(0, 45, 60, 0.58);
+    background: rgba(30,45,80,0.55);
 }
 
 .history-info {
@@ -599,7 +606,7 @@ h1 span {
 
 .history-time {
     margin-top: 4px;
-    color: #66858e;
+    color: #64748b;
     font-size: 10px;
 }
 
@@ -616,16 +623,16 @@ h1 span {
 }
 
 .history-open {
-    background: rgba(0, 119, 255, 0.25);
+    background: rgba(59,130,246,0.25);
 }
 
 .history-delete {
-    background: rgba(255, 60, 60, 0.2);
+    background: rgba(239,68,68,0.2);
 }
 
 .empty-history {
     padding: 25px;
-    color: #66858e;
+    color: #64748b;
     font-size: 13px;
 }
 
@@ -644,7 +651,7 @@ h1 span {
 }
 
 .info-section p {
-    color: #b7d5dc;
+    color: #cbd5e1;
     line-height: 1.8;
     font-size: 14px;
 
@@ -669,20 +676,20 @@ h1 span {
 .feature-card {
     padding: 22px;
 
-    border: 1px solid rgba(0, 229, 255, 0.12);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 18px;
 
-    background: rgba(0, 40, 55, 0.5);
+    background: rgba(30,45,80,0.45);
 
     transition: 0.3s;
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
-    background: rgba(0, 60, 75, 0.68);
+    background: rgba(40,60,100,0.65);
 }
 
-.feature-card>div {
+.feature-card > div {
     font-size: 30px;
 }
 
@@ -706,9 +713,9 @@ footer {
 
     text-align: center;
 
-    border-top: 1px solid rgba(0, 229, 255, 0.12);
+    border-top: 1px solid rgba(255,255,255,0.1);
 
-    background: rgba(0, 15, 25, 0.75);
+    background: rgba(3,8,25,0.6);
 }
 
 .footer-logo {
@@ -718,7 +725,7 @@ footer {
 
 footer p {
     margin-top: 8px;
-    color: #66858e;
+    color: #64748b;
     font-size: 12px;
 }
 
@@ -733,6 +740,7 @@ footer p {
         grid-template-columns:
             repeat(5, 1fr);
     }
+
 }
 
 
@@ -845,7 +853,7 @@ footer p {
         font-size: 17px;
     }
 
-    .quick-links button>span:last-child {
+    .quick-links button > span:last-child {
         font-size: 10px;
     }
 
@@ -918,65 +926,5 @@ footer p {
     .quick-links {
         gap: 7px;
     }
+
 }
-
-/* =========================
-   SEPARATE MENU PAGE
-========================= */
-
-.info-section {
-    width: min(900px, calc(100% - 30px));
-    min-height: 500px;
-    margin: 80px auto 40px;
-
-    padding: 45px 30px;
-
-    border-radius: 25px;
-
-    text-align: center;
-
-    background: rgba(0, 25, 40, 0.92);
-
-    border: 1px solid rgba(0, 229, 255, 0.25);
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.45),
-        0 0 35px rgba(0, 229, 255, 0.08);
-
-    animation: infoPageShow 0.35s ease;
-}
-
-.info-section h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.info-section p {
-    max-width: 700px;
-    margin: 12px auto;
-
-    line-height: 1.8;
-    font-size: 15px;
-}
-
-@keyframes infoPageShow {
-
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.hidden {
-    display: none !important;
-}
-
-New theme: 🌊 Dark Teal+Cyan+Blue+Green Is mein background bhi change ho gaya hai aur logo,
-search button,
-menu,
-cards aur headings sab matching hain.

@@ -1,9 +1,9 @@
 /* =========================
-   HASSAN BROWSER
-   MENU + SEARCH + HISTORY
+   NEXBROWSE
+   SEARCH + HISTORY + MENU
 ========================= */
 
-const HISTORY_KEY = "hassanBrowserHistory";
+const HISTORY_KEY = "nexBrowseHistory";
 
 const input = document.getElementById("website");
 const searchBtn = document.getElementById("searchBtn");
@@ -14,7 +14,7 @@ const dropdownMenu = document.getElementById("dropdownMenu");
 
 
 /* =========================
-   3 DOT MENU
+   MENU
 ========================= */
 
 menuBtn.addEventListener("click", function (event) {
@@ -26,7 +26,7 @@ menuBtn.addEventListener("click", function (event) {
 });
 
 
-/* Close menu when clicking outside */
+/* Click outside menu */
 
 document.addEventListener("click", function (event) {
 
@@ -41,109 +41,12 @@ document.addEventListener("click", function (event) {
 
 
 /* =========================
-   SHOW PAGE / SECTION
-========================= */
-
-function showSection(sectionId) {
-
-    const homePage = document.getElementById("home");
-    const historyPage = document.getElementById("history");
-
-    const infoSections =
-        document.querySelectorAll(".info-section");
-
-
-    /* Hide all information sections */
-
-    infoSections.forEach(function (section) {
-
-        section.classList.add("hidden");
-
-    });
-
-
-    /* =========================
-       HOME
-    ========================= */
-
-    if (sectionId === "home") {
-
-        homePage.style.display = "block";
-        historyPage.style.display = "block";
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-
-
-    /* =========================
-       HISTORY
-    ========================= */
-
-    else if (sectionId === "history") {
-
-        homePage.style.display = "block";
-        historyPage.style.display = "block";
-
-        historyPage.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }
-
-
-    /* =========================
-       ABOUT / FEATURES /
-       CONTACT / PRIVACY / TERMS
-    ========================= */
-
-    else {
-
-        /* Hide main Home content */
-
-        homePage.style.display = "none";
-        historyPage.style.display = "none";
-
-
-        /* Find selected section */
-
-        const selectedSection =
-            document.getElementById(sectionId);
-
-
-        if (selectedSection) {
-
-            selectedSection.classList.remove("hidden");
-
-            selectedSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }
-
-    }
-
-
-    /* Close 3-dot menu */
-
-    dropdownMenu.classList.remove("show");
-
-}
-
-
-/* =========================
-   HISTORY FUNCTIONS
+   HISTORY
 ========================= */
 
 function getHistory() {
 
-    const saved =
-        localStorage.getItem(HISTORY_KEY);
+    const saved = localStorage.getItem(HISTORY_KEY);
 
     if (!saved) {
         return [];
@@ -156,7 +59,6 @@ function getHistory() {
     catch (error) {
         return [];
     }
-
 }
 
 
@@ -164,11 +66,9 @@ function saveHistory(query, url) {
 
     let history = getHistory();
 
-
     history = history.filter(function (item) {
 
-        return item.query.toLowerCase()
-            !== query.toLowerCase();
+        return item.query.toLowerCase() !== query.toLowerCase();
 
     });
 
@@ -176,25 +76,24 @@ function saveHistory(query, url) {
     history.unshift({
 
         query: query,
+
         url: url,
+
         time: new Date().toLocaleString()
 
     });
 
 
-    /* Keep last 20 searches */
+    /* Maximum 20 searches */
 
     history = history.slice(0, 20);
-
 
     localStorage.setItem(
         HISTORY_KEY,
         JSON.stringify(history)
     );
 
-
     displayHistory();
-
 }
 
 
@@ -206,11 +105,6 @@ function displayHistory() {
 
     const historyList =
         document.getElementById("historyList");
-
-    if (!historyList) {
-        return;
-    }
-
 
     const history = getHistory();
 
@@ -318,31 +212,26 @@ function deleteHistory(index) {
    CLEAR HISTORY
 ========================= */
 
-if (clearBtn) {
+clearBtn.addEventListener("click", function () {
 
-    clearBtn.addEventListener(
-        "click",
-        function () {
+    const history = getHistory();
 
-            const history = getHistory();
+    if (history.length === 0) {
+        return;
+    }
 
-            if (history.length === 0) {
-                return;
-            }
+    const confirmClear =
+        confirm("Clear all search history?");
 
+    if (confirmClear) {
 
-            if (confirm("Clear all search history?")) {
+        localStorage.removeItem(HISTORY_KEY);
 
-                localStorage.removeItem(HISTORY_KEY);
+        displayHistory();
 
-                displayHistory();
+    }
 
-            }
-
-        }
-    );
-
-}
+});
 
 
 /* =========================
@@ -367,6 +256,10 @@ function searchWeb() {
     let url;
 
 
+    /*
+       If user enters a website
+    */
+
     if (
         query.startsWith("http://") ||
         query.startsWith("https://")
@@ -384,6 +277,10 @@ function searchWeb() {
         url = "https://" + query;
 
     }
+
+    /*
+       Otherwise Google search
+    */
 
     else {
 
@@ -406,40 +303,36 @@ function searchWeb() {
 }
 
 
-/* Search button */
+/* =========================
+   SEARCH BUTTON
+========================= */
 
-if (searchBtn) {
-
-    searchBtn.addEventListener(
-        "click",
-        searchWeb
-    );
-
-}
-
-
-/* Enter key */
-
-if (input) {
-
-    input.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key === "Enter") {
-
-                searchWeb();
-
-            }
-
-        }
-    );
-
-}
+searchBtn.addEventListener(
+    "click",
+    searchWeb
+);
 
 
 /* =========================
-   QUICK LINKS
+   ENTER KEY
+========================= */
+
+input.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Enter") {
+
+            searchWeb();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   QUICK WEBSITE
 ========================= */
 
 function openSite(name, url) {
@@ -451,6 +344,104 @@ function openSite(name, url) {
         "_blank",
         "noopener,noreferrer"
     );
+
+}
+
+
+/* =========================
+   SHOW SECTIONS
+========================= */
+
+function showSection(sectionId) {
+
+    const sections =
+        document.querySelectorAll(
+            ".info-section"
+        );
+
+
+    /*
+       Hide About, Features,
+       Contact, Privacy, Terms
+    */
+
+    sections.forEach(function (section) {
+
+        section.classList.add("hidden");
+
+    });
+
+
+    /*
+       History is always hidden
+       when another menu section opens
+    */
+
+    const history =
+        document.getElementById("history");
+
+
+    /*
+       Home
+    */
+
+    if (sectionId === "home") {
+
+        history.style.display = "block";
+
+        document.getElementById("home")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /*
+       History
+    */
+
+    else if (sectionId === "history") {
+
+        history.style.display = "block";
+
+        history.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /*
+       Information sections
+    */
+
+    else {
+
+        history.style.display = "none";
+
+        const section =
+            document.getElementById(sectionId);
+
+        if (section) {
+
+            section.classList.remove("hidden");
+
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    }
+
+
+    /*
+       Close menu
+    */
+
+    dropdownMenu.classList.remove("show");
 
 }
 
@@ -468,63 +459,6 @@ function escapeHTML(text) {
 
     return div.innerHTML;
 
-}
-function showSection(sectionId) {
-
-    const home = document.getElementById("home");
-    const history = document.getElementById("history");
-
-    const sections = document.querySelectorAll(".info-section");
-
-    // Sab info sections hide
-    sections.forEach(function(section) {
-        section.classList.add("hidden");
-    });
-
-    // Home
-    if (sectionId === "home") {
-
-        home.style.display = "block";
-        history.style.display = "block";
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-
-    // History
-    else if (sectionId === "history") {
-
-        home.style.display = "block";
-        history.style.display = "block";
-
-        history.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-    // About / Features / Contact / Privacy / Terms
-    else {
-
-        home.style.display = "none";
-        history.style.display = "none";
-
-        const page = document.getElementById(sectionId);
-
-        if (page) {
-            page.classList.remove("hidden");
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-    }
-
-    dropdownMenu.classList.remove("show");
 }
 
 
