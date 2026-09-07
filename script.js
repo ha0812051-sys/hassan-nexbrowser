@@ -1,9 +1,9 @@
 /* =========================
-   NEXBROWSE
-   SEARCH + HISTORY + MENU
+   NEX BROWSER
+   MENU + SEARCH + HISTORY
 ========================= */
 
-const HISTORY_KEY = "nexBrowseHistory";
+const HISTORY_KEY = "NexBrowserHistory";
 
 const input = document.getElementById("website");
 const searchBtn = document.getElementById("searchBtn");
@@ -14,7 +14,7 @@ const dropdownMenu = document.getElementById("dropdownMenu");
 
 
 /* =========================
-   MENU
+   3 DOT MENU
 ========================= */
 
 menuBtn.addEventListener("click", function (event) {
@@ -26,7 +26,7 @@ menuBtn.addEventListener("click", function (event) {
 });
 
 
-/* Click outside menu */
+/* Close menu when clicking outside */
 
 document.addEventListener("click", function (event) {
 
@@ -41,12 +41,109 @@ document.addEventListener("click", function (event) {
 
 
 /* =========================
-   HISTORY
+   SHOW PAGE / SECTION
+========================= */
+
+function showSection(sectionId) {
+
+    const homePage = document.getElementById("home");
+    const historyPage = document.getElementById("history");
+
+    const infoSections =
+        document.querySelectorAll(".info-section");
+
+
+    /* Hide all information sections */
+
+    infoSections.forEach(function (section) {
+
+        section.classList.add("hidden");
+
+    });
+
+
+    /* =========================
+       HOME
+    ========================= */
+
+    if (sectionId === "home") {
+
+        homePage.style.display = "block";
+        historyPage.style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       HISTORY
+    ========================= */
+
+    else if (sectionId === "history") {
+
+        homePage.style.display = "block";
+        historyPage.style.display = "block";
+
+        historyPage.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    /* =========================
+       ABOUT / FEATURES /
+       CONTACT / PRIVACY / TERMS
+    ========================= */
+
+    else {
+
+        /* Hide main Home content */
+
+        homePage.style.display = "none";
+        historyPage.style.display = "none";
+
+
+        /* Find selected section */
+
+        const selectedSection =
+            document.getElementById(sectionId);
+
+
+        if (selectedSection) {
+
+            selectedSection.classList.remove("hidden");
+
+            selectedSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    }
+
+
+    /* Close 3-dot menu */
+
+    dropdownMenu.classList.remove("show");
+
+}
+
+
+/* =========================
+   HISTORY FUNCTIONS
 ========================= */
 
 function getHistory() {
 
-    const saved = localStorage.getItem(HISTORY_KEY);
+    const saved =
+        localStorage.getItem(HISTORY_KEY);
 
     if (!saved) {
         return [];
@@ -59,6 +156,7 @@ function getHistory() {
     catch (error) {
         return [];
     }
+
 }
 
 
@@ -66,9 +164,11 @@ function saveHistory(query, url) {
 
     let history = getHistory();
 
+
     history = history.filter(function (item) {
 
-        return item.query.toLowerCase() !== query.toLowerCase();
+        return item.query.toLowerCase()
+            !== query.toLowerCase();
 
     });
 
@@ -76,24 +176,25 @@ function saveHistory(query, url) {
     history.unshift({
 
         query: query,
-
         url: url,
-
         time: new Date().toLocaleString()
 
     });
 
 
-    /* Maximum 20 searches */
+    /* Keep last 20 searches */
 
     history = history.slice(0, 20);
+
 
     localStorage.setItem(
         HISTORY_KEY,
         JSON.stringify(history)
     );
 
+
     displayHistory();
+
 }
 
 
@@ -105,6 +206,11 @@ function displayHistory() {
 
     const historyList =
         document.getElementById("historyList");
+
+    if (!historyList) {
+        return;
+    }
+
 
     const history = getHistory();
 
@@ -212,26 +318,31 @@ function deleteHistory(index) {
    CLEAR HISTORY
 ========================= */
 
-clearBtn.addEventListener("click", function () {
+if (clearBtn) {
 
-    const history = getHistory();
+    clearBtn.addEventListener(
+        "click",
+        function () {
 
-    if (history.length === 0) {
-        return;
-    }
+            const history = getHistory();
 
-    const confirmClear =
-        confirm("Clear all search history?");
+            if (history.length === 0) {
+                return;
+            }
 
-    if (confirmClear) {
 
-        localStorage.removeItem(HISTORY_KEY);
+            if (confirm("Clear all search history?")) {
 
-        displayHistory();
+                localStorage.removeItem(HISTORY_KEY);
 
-    }
+                displayHistory();
 
-});
+            }
+
+        }
+    );
+
+}
 
 
 /* =========================
@@ -256,10 +367,6 @@ function searchWeb() {
     let url;
 
 
-    /*
-       If user enters a website
-    */
-
     if (
         query.startsWith("http://") ||
         query.startsWith("https://")
@@ -277,10 +384,6 @@ function searchWeb() {
         url = "https://" + query;
 
     }
-
-    /*
-       Otherwise Google search
-    */
 
     else {
 
@@ -303,36 +406,40 @@ function searchWeb() {
 }
 
 
-/* =========================
-   SEARCH BUTTON
-========================= */
+/* Search button */
 
-searchBtn.addEventListener(
-    "click",
-    searchWeb
-);
+if (searchBtn) {
+
+    searchBtn.addEventListener(
+        "click",
+        searchWeb
+    );
+
+}
 
 
-/* =========================
-   ENTER KEY
-========================= */
+/* Enter key */
 
-input.addEventListener(
-    "keydown",
-    function (event) {
+if (input) {
 
-        if (event.key === "Enter") {
+    input.addEventListener(
+        "keydown",
+        function (event) {
 
-            searchWeb();
+            if (event.key === "Enter") {
+
+                searchWeb();
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
 
 /* =========================
-   QUICK WEBSITE
+   QUICK LINKS
 ========================= */
 
 function openSite(name, url) {
@@ -344,104 +451,6 @@ function openSite(name, url) {
         "_blank",
         "noopener,noreferrer"
     );
-
-}
-
-
-/* =========================
-   SHOW SECTIONS
-========================= */
-
-function showSection(sectionId) {
-
-    const sections =
-        document.querySelectorAll(
-            ".info-section"
-        );
-
-
-    /*
-       Hide About, Features,
-       Contact, Privacy, Terms
-    */
-
-    sections.forEach(function (section) {
-
-        section.classList.add("hidden");
-
-    });
-
-
-    /*
-       History is always hidden
-       when another menu section opens
-    */
-
-    const history =
-        document.getElementById("history");
-
-
-    /*
-       Home
-    */
-
-    if (sectionId === "home") {
-
-        history.style.display = "block";
-
-        document.getElementById("home")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
-
-    }
-
-
-    /*
-       History
-    */
-
-    else if (sectionId === "history") {
-
-        history.style.display = "block";
-
-        history.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-
-    /*
-       Information sections
-    */
-
-    else {
-
-        history.style.display = "none";
-
-        const section =
-            document.getElementById(sectionId);
-
-        if (section) {
-
-            section.classList.remove("hidden");
-
-            section.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }
-
-    }
-
-
-    /*
-       Close menu
-    */
-
-    dropdownMenu.classList.remove("show");
 
 }
 
@@ -460,6 +469,64 @@ function escapeHTML(text) {
     return div.innerHTML;
 
 }
+function showSection(sectionId) {
+
+    const home = document.getElementById("home");
+    const history = document.getElementById("history");
+
+    const sections = document.querySelectorAll(".info-section");
+
+    // Sab info sections hide
+    sections.forEach(function (section) {
+        section.classList.add("hidden");
+    });
+
+    // Home
+    if (sectionId === "home") {
+
+        home.style.display = "block";
+        history.style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+    // History
+    else if (sectionId === "history") {
+
+        home.style.display = "block";
+        history.style.display = "block";
+
+        history.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+    // About / Features / Contact / Privacy / Terms
+    else {
+
+        home.style.display = "none";
+        history.style.display = "none";
+
+        const page = document.getElementById(sectionId);
+
+        if (page) {
+            page.classList.remove("hidden");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    }
+
+    dropdownMenu.classList.remove("show");
+}
+
 
 
 /* =========================

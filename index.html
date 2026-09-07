@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-        content="NexBrowse - Explore the web with a fast and modern browser-style search experience.">
+        content="Nex browser - Explore the web with a fast and modern browser-style search experience.">
 
-    <title>NexBrowse — Explore the Web</title>
-    <script src="script.js"></script>
+    <title>Nex browser â€” Explore the Web</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -27,10 +26,10 @@
     <header class="header">
 
         <div class="brand">
-            <div class="logo">N</div>
+            <div class="logo">H</div>
 
             <div class="brand-text">
-                <h2>Nex<span>Browse</span></h2>
+                <h2>Nex <span>Browser</span></h2>
                 <small>Explore the Web</small>
             </div>
         </div>
@@ -39,41 +38,48 @@
         <div class="menu-container">
 
             <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-                ⋮
+                ðŸ
+
             </button>
 
             <div class="dropdown-menu" id="dropdownMenu">
-
+                <!--
                 <button onclick="showSection('home')">
-                    🏠 Home
+                    ðŸ  Home
                 </button>
 
                 <button onclick="showSection('history')">
-                    🕘 History
+                    ðŸ•˜ History
                 </button>
 
                 <button onclick="showSection('aboutSection')">
-                    ℹ️ About
+                    â„¹ï¸ About
                 </button>
 
                 <button onclick="showSection('featuresSection')">
-                    ⭐ Features
+                    â­ Features
                 </button>
 
                 <button onclick="showSection('contactSection')">
-                    📩 Contact
+                    ðŸ“© Contact
                 </button>
 
                 <button onclick="showSection('privacySection')">
-                    🔒 Privacy
+                    ðŸ”’ Privacy
                 </button>
 
                 <button onclick="showSection('termsSection')">
-                    📄 Terms
+                    ðŸ“„ Terms
                 </button>
-
+-->
+                <button onclick="showSection('home')">ðŸ  Home</button>
+                <button onclick="showSection('history')">ðŸ•˜ History</button>
+                <button onclick="showSection('about')">About</button>
+                <button onclick="showSection('features')">Feature</button>
+                <button onclick="showSection('contact')">Contact</button>
+                <button onclick="showSection('privacy')">Privacy</button>
+                <button onclick="showSection('terms')">Term</button>
             </div>
-        </div>
 
     </header>
 
@@ -82,7 +88,7 @@
     <main id="home">
 
         <div class="hero-badge">
-            ✨ FAST • SIMPLE • MODERN
+            âœ¨ FAST â€¢ SIMPLE â€¢ MODERN
         </div>
 
         <h1>
@@ -97,7 +103,7 @@
         <!-- SEARCH -->
         <div class="search-box">
 
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"></span>
 
             <input type="text" id="website" placeholder="Search the web or enter a URL..." autocomplete="off">
 
@@ -112,7 +118,7 @@
         </p>
 
 
-        <!-- QUICK LINKS -->
+        <!-- QUICK LINKS 
         <section class="quick-section">
 
             <h2>Quick Access</h2>
@@ -125,7 +131,7 @@
                 </button>
 
                 <button onclick="openSite('YouTube','https://www.youtube.com')">
-                    <span class="site-icon">▶</span>
+                    <span class="site-icon">â–¶</span>
                     <span>YouTube</span>
                 </button>
 
@@ -135,22 +141,22 @@
                 </button>
 
                 <button onclick="openSite('TikTok','https://www.tiktok.com')">
-                    <span class="site-icon">♪</span>
+                    <span class="site-icon">â™ª</span>
                     <span>TikTok</span>
                 </button>
 
                 <button onclick="openSite('Instagram','https://www.instagram.com')">
-                    <span class="site-icon">◎</span>
+                    <span class="site-icon">â—Ž</span>
                     <span>Instagram</span>
                 </button>
 
                 <button onclick="openSite('ChatGPT','https://chatgpt.com')">
-                    <span class="site-icon">✦</span>
+                    <span class="site-icon">âœ¦</span>
                     <span>ChatGPT</span>
                 </button>
 
                 <button onclick="openSite('GitHub','https://github.com')">
-                    <span class="site-icon">●</span>
+                    <span class="site-icon">â—</span>
                     <span>GitHub</span>
                 </button>
 
@@ -167,39 +173,40 @@
             </div>
 
         </section>
+        -->
 
 
-        <!-- HISTORY 
+        <!-- HISTORY
         <section class="history-section" id="history">
 
             <div class="section-header">
 
                 <div>
                     <span class="section-label">YOUR ACTIVITY</span>
-                    <h2>🕘 Search History</h2>
+                    <h2>ðŸ•˜ Search History</h2>
                 </div>
 
                 <button class="clear-btn" id="clearBtn">
-                    🗑️ Clear
+                    ðŸ—‘ï¸ Clear
                 </button>
 
             </div>
 
             <div id="historyList" class="history-list"></div>
-            -->
 
         </section>
+         -->
 
 
         <!-- ABOUT -->
         <section id="aboutSection" class="info-section hidden">
 
-            <span class="section-label">ABOUT NEXBROWSE</span>
+            <span class="section-label">ABOUT Nex BROWSER</span>
 
-            <h2>About NexBrowse</h2>
+            <h2>About Nex Browser</h2>
 
             <p>
-                NexBrowse is a simple, modern browser-style web project
+                Nex Browser is a simple, modern browser-style web project
                 designed to help users search the web and quickly open
                 popular websites from one place.
             </p>
@@ -212,33 +219,32 @@
 
             <span class="section-label">WHAT WE OFFER</span>
 
-            <h2>⭐ Features</h2>
+            <h2>â­ Features</h2>
 
             <div class="features-grid">
 
                 <div class="feature-card">
-                    <div>🔎</div>
+                    <div>ðŸ”Ž</div>
                     <h3>Web Search</h3>
                     <p>Search the web quickly and easily.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div>🌐</div>
+                    <div>ðŸŒ</div>
                     <h3>Quick Websites</h3>
                     <p>Open popular websites with one click.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div>🕘</div>
+                    <div>ðŸ•˜</div>
                     <h3>Search History</h3>
                     <p>Keep your recent searches locally.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div>📱</div>
+                    <div>ðŸ“±</div>
                     <h3>Responsive</h3>
                     <p>Works on phones, tablets and computers.</p>
-
                 </div>
 
             </div>
@@ -251,10 +257,10 @@
 
             <span class="section-label">GET IN TOUCH</span>
 
-            <h2>📩 Contact</h2>
+            <h2>ðŸ“© Contact</h2>
 
             <p>
-                Have a suggestion or feedback about NexBrowse?
+                Have a suggestion or feedback about Nex Browser?
                 We'd love to hear from you.
             </p>
 
@@ -266,10 +272,10 @@
 
             <span class="section-label">YOUR PRIVACY</span>
 
-            <h2>🔒 Privacy Policy</h2>
+            <h2>ðŸ”’ Privacy Policy</h2>
 
             <p>
-                NexBrowse does not intentionally collect personal
+                Nex Browser does not intentionally collect personal
                 information through this website.
             </p>
 
@@ -286,10 +292,10 @@
 
             <span class="section-label">WEBSITE TERMS</span>
 
-            <h2>📄 Terms & Conditions</h2>
+            <h2>ðŸ“„ Terms & Conditions</h2>
 
             <p>
-                NexBrowse is a browser-style web project.
+                Nex Browser is a browser-style web project.
                 Users should use the website responsibly and
                 follow applicable laws.
             </p>
@@ -303,17 +309,19 @@
     <footer>
 
         <div class="footer-logo">
-            Nex<span>Browse</span>
+            Nex <span>Browser</span>
         </div>
 
-        <p>Explore the Web • Fast • Simple • Modern</p>
+        <p>Explore the Web â€¢ Fast â€¢ Simple â€¢ Modern</p>
 
         <p>
-            © 2026 NexBrowse. All rights reserved.
+            Â© 2026 Nex Browser. All rights reserved.
         </p>
 
     </footer>
 
+
+    <script src="script.js"></script>
 
 </body>
 
