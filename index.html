@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-        content="NexBrowse - Explore the web with a fast and modern browser-style search experience.">
+        content="Hassan Browser - Explore the web with a fast and modern browser-style search experience.">
 
-    <title>NexBrowse — Explore the Web</title>
+    <title>Hassan Browser — Explore the Web</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,10 +26,10 @@
     <header class="header">
 
         <div class="brand">
-            <div class="logo">N</div>
+            <div class="logo">H</div>
 
             <div class="brand-text">
-                <h2>Nex<span>Browse</span></h2>
+                <h2>Hassan <span>Browser</span></h2>
                 <small>Explore the Web</small>
             </div>
         </div>
@@ -41,7 +42,7 @@
             </button>
 
             <div class="dropdown-menu" id="dropdownMenu">
-
+                <!--
                 <button onclick="showSection('home')">
                     🏠 Home
                 </button>
@@ -69,9 +70,15 @@
                 <button onclick="showSection('termsSection')">
                     📄 Terms
                 </button>
-
+-->
+                <button onclick="showSection('home')">🏠 Home</button>
+                <button onclick="showSection('history')">🕘 History</button>
+                <button onclick="showSection('about')">About</button>
+                <button onclick="showSection('features')">Feature</button>
+                <button onclick="showSection('contact')">Contact</button>
+                <button onclick="showSection('privacy')">Privacy</button>
+                <button onclick="showSection('terms')">Term</button>
             </div>
-        </div>
 
     </header>
 
@@ -97,12 +104,7 @@
 
             <span class="search-icon">🔍</span>
 
-            <input
-                type="text"
-                id="website"
-                placeholder="Search the web or enter a URL..."
-                autocomplete="off"
-            >
+            <input type="text" id="website" placeholder="Search the web or enter a URL..." autocomplete="off">
 
             <button id="searchBtn">
                 Search
@@ -115,7 +117,7 @@
         </p>
 
 
-        <!-- QUICK LINKS -->
+        <!-- QUICK LINKS 
         <section class="quick-section">
 
             <h2>Quick Access</h2>
@@ -170,9 +172,10 @@
             </div>
 
         </section>
+        -->
 
 
-        <!-- HISTORY -->
+        <!-- HISTORY
         <section class="history-section" id="history">
 
             <div class="section-header">
@@ -191,17 +194,18 @@
             <div id="historyList" class="history-list"></div>
 
         </section>
+         -->
 
 
         <!-- ABOUT -->
         <section id="aboutSection" class="info-section hidden">
 
-            <span class="section-label">ABOUT NEXBROWSE</span>
+            <span class="section-label">ABOUT HASSAN BROWSER</span>
 
-            <h2>About NexBrowse</h2>
+            <h2>About Hassan Browser</h2>
 
             <p>
-                NexBrowse is a simple, modern browser-style web project
+                Hassan Browser is a simple, modern browser-style web project
                 designed to help users search the web and quickly open
                 popular websites from one place.
             </p>
@@ -255,7 +259,7 @@
             <h2>📩 Contact</h2>
 
             <p>
-                Have a suggestion or feedback about NexBrowse?
+                Have a suggestion or feedback about Hassan Browser?
                 We'd love to hear from you.
             </p>
 
@@ -270,7 +274,7 @@
             <h2>🔒 Privacy Policy</h2>
 
             <p>
-                NexBrowse does not intentionally collect personal
+                Hassan Browser does not intentionally collect personal
                 information through this website.
             </p>
 
@@ -290,7 +294,7 @@
             <h2>📄 Terms & Conditions</h2>
 
             <p>
-                NexBrowse is a browser-style web project.
+                Hassan Browser is a browser-style web project.
                 Users should use the website responsibly and
                 follow applicable laws.
             </p>
@@ -304,13 +308,13 @@
     <footer>
 
         <div class="footer-logo">
-            Nex<span>Browse</span>
+            Hassan <span>Browser</span>
         </div>
 
         <p>Explore the Web • Fast • Simple • Modern</p>
 
         <p>
-            © 2026 NexBrowse. All rights reserved.
+            © 2026 Hassan Browser. All rights reserved.
         </p>
 
     </footer>
@@ -319,4 +323,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
