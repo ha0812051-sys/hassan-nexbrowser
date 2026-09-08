@@ -30,6 +30,9 @@ All visual design and responsive layout is handled by style.css.
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
   <title>Nex Browser — Search the Web</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -51,6 +54,7 @@ All visual design and responsive layout is handled by style.css.
     </a>
 
     <div class="menu-container">
+      <button class="install-btn" id="installBtn" type="button" hidden>Install app</button>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"
         aria-controls="dropdownMenu">⋮</button>
       <nav class="dropdown-menu" id="dropdownMenu" aria-label="Main navigation">
@@ -112,7 +116,7 @@ All visual design and responsive layout is handled by style.css.
       </div>
     </section>
 
-    <!-- SEARCH HISTORY 
+    <!-- SEARCH HISTORY -->
     <section class="history-section" id="history" aria-labelledby="historyTitle">
       <div class="section-header">
         <div>
@@ -121,7 +125,7 @@ All visual design and responsive layout is handled by style.css.
         </div>
         <button class="clear-btn" id="clearBtn" type="button">Clear</button>
       </div>
-      <div id="historyList" class="history-list" aria-live="polite"></div>-->
+      <div id="historyList" class="history-list" aria-live="polite"></div>
     </section>
 
     <!-- INFORMATION PAGES -->

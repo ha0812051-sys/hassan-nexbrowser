@@ -41,6 +41,9 @@ The visual appearance is controlled by style.css.
   const historyList = $("#historyList");
   const menuBtn = $("#menuBtn");
   const dropdownMenu = $("#dropdownMenu");
+  const installBtn = $("#installBtn");
+
+  let deferredInstallPrompt;
 
   // ============================================================
   // SEARCH ENGINE CONFIGURATION
@@ -241,7 +244,7 @@ The visual appearance is controlled by style.css.
   function clearHistory() {
     if (!getHistory().length) return;
     if (window.confirm("Clear all search history?")) {
-      try { localStorage.removeItem(HISTORY_KEY); } catch {}
+      try { localStorage.removeItem(HISTORY_KEY); } catch { }
       displayHistory();
     }
   }
@@ -255,13 +258,15 @@ The visual appearance is controlled by style.css.
 
     const sections = $$(".info-section");
     sections.forEach(section => section.classList.add("hidden"));
+    document.body.classList.remove("history-view");
 
     if (sectionId === "home") {
       home.style.display = "";
-      $("#history")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (sectionId === "history") {
       home.style.display = "";
-      $("#history")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.body.classList.add("history-view");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       home.style.display = "block";
       const page = document.getElementById(sectionId);
@@ -290,8 +295,8 @@ The visual appearance is controlled by style.css.
 
   document.addEventListener("click", event => {
     if (dropdownMenu && menuBtn &&
-        !dropdownMenu.contains(event.target) &&
-        !menuBtn.contains(event.target)) {
+      !dropdownMenu.contains(event.target) &&
+      !menuBtn.contains(event.target)) {
       closeMenu();
     }
   });
@@ -317,6 +322,31 @@ The visual appearance is controlled by style.css.
   });
 
   clearBtn?.addEventListener("click", clearHistory);
+
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    if (installBtn) installBtn.hidden = false;
+  });
+
+  installBtn?.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installBtn.hidden = true;
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    if (installBtn) installBtn.hidden = true;
+  });
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => { });
+    });
+  }
 
   // If the page is opened from a fragment, show the relevant section.
   const hash = location.hash.slice(1);
