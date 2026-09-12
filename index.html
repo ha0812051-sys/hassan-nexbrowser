@@ -29,7 +29,6 @@ All visual design and responsive layout is handled by style.css.
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
- <meta name="google-site-verification" content="GOOGLE_CODE_HERE">
   <title>Nex Browser — Search the Web</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2563eb">
@@ -56,6 +55,8 @@ All visual design and responsive layout is handled by style.css.
 
     <div class="menu-container">
       <button class="install-btn" id="installBtn" type="button" hidden>Install app</button>
+      <button class="auth-btn auth-btn-secondary" id="signInBtn" type="button">Sign in</button>
+      <button class="auth-btn auth-btn-primary" id="createAccountBtn" type="button">Create account</button>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"
         aria-controls="dropdownMenu">⋮</button>
       <nav class="dropdown-menu" id="dropdownMenu" aria-label="Main navigation">
@@ -83,9 +84,9 @@ All visual design and responsive layout is handled by style.css.
         aria-label="Search the web or enter a URL" maxlength="500" spellcheck="false" required>
       <select id="engine" aria-label="Search engine">
         <option value="google">Google</option>
-        <!-- <option value="bing">Bing</option> -->
+        <option value="bing">Bing</option>
         <option value="duckduckgo">DuckDuckGo</option>
-        <!-- <option value="brave">Brave Search</option> -->
+        <option value="brave">Brave Search</option>
       </select>
       <button id="searchBtn" type="submit">Search</button>
     </form>
@@ -179,6 +180,34 @@ All visual design and responsive layout is handled by style.css.
         visit.</p>
     </section>
   </main>
+
+  <!-- AUTHENTICATION DIALOG -->
+  <div class="auth-backdrop" id="authBackdrop" hidden>
+    <section class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="auth-close" id="authCloseBtn" type="button" aria-label="Close sign in dialog">×</button>
+      <span class="section-label">NEX ACCOUNT</span>
+      <h2 id="authTitle">Welcome back</h2>
+      <p class="auth-subtitle" id="authSubtitle">Sign in to keep your Nex experience connected.</p>
+
+      <div class="auth-tabs" role="tablist" aria-label="Account options">
+        <button class="auth-tab active" id="signInTab" type="button" role="tab" aria-selected="true">Sign in</button>
+        <button class="auth-tab" id="createAccountTab" type="button" role="tab" aria-selected="false">Create
+          account</button>
+      </div>
+
+      <form id="authForm" class="auth-form">
+        <label for="authName" id="authNameLabel" hidden>Full name</label>
+        <input id="authName" name="name" type="text" placeholder="Full name" autocomplete="name" hidden>
+        <label for="authEmail">Email address</label>
+        <input id="authEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <label for="authPassword">Password</label>
+        <input id="authPassword" name="password" type="password" placeholder="Enter your password"
+          autocomplete="current-password" minlength="6" required>
+        <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
+        <p class="auth-message" id="authMessage" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
