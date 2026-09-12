@@ -42,8 +42,27 @@ The visual appearance is controlled by style.css.
   const menuBtn = $("#menuBtn");
   const dropdownMenu = $("#dropdownMenu");
   const installBtn = $("#installBtn");
+  const signInBtn = $("#signInBtn");
+  const createAccountBtn = $("#createAccountBtn");
+  const authBackdrop = $("#authBackdrop");
+  const authCloseBtn = $("#authCloseBtn");
+  const authForm = $("#authForm");
+  const authName = $("#authName");
+  const authNameLabel = $("#authNameLabel");
+  const authEmail = $("#authEmail");
+  const authPassword = $("#authPassword");
+  const authTitle = $("#authTitle");
+  const authSubtitle = $("#authSubtitle");
+  const authSubmit = $("#authSubmit");
+  const authMessage = $("#authMessage");
+  const signInTab = $("#signInTab");
+  const createAccountTab = $("#createAccountTab");
+
+  const ACCOUNT_KEY = "NexBrowserAccount.v1";
+  const SESSION_KEY = "NexBrowserSession.v1";
 
   let deferredInstallPrompt;
+  let authMode = "signin";
 
   // ============================================================
   // SEARCH ENGINE CONFIGURATION
@@ -57,6 +76,95 @@ The visual appearance is controlled by style.css.
 
   const ALLOWED_PROTOCOLS = new Set(["http:", "https:"]);
   const BLOCKED_SCHEMES = /^(javascript|data|vbscript|file|blob|about):/i;
+
+  function setAuthMode(mode) {
+    authMode = mode;
+    const isCreate = mode === "create";
+    authTitle.textContent = isCreate ? "Create your account" : "Welcome back";
+    authSubtitle.textContent = isCreate
+      ? "Create a local Nex account to personalize your experience."
+      : "Sign in to keep your Nex experience connected.";
+    authName.hidden = !isCreate;
+    authNameLabel.hidden = !isCreate;
+    authName.required = isCreate;
+    authPassword.autocomplete = isCreate ? "new-password" : "current-password";
+    authSubmit.textContent = isCreate ? "Create account" : "Sign in";
+    signInTab.classList.toggle("active", !isCreate);
+    createAccountTab.classList.toggle("active", isCreate);
+    signInTab.setAttribute("aria-selected", String(!isCreate));
+    createAccountTab.setAttribute("aria-selected", String(isCreate));
+    authMessage.textContent = "";
+  }
+
+  function openAuth(mode = "signin") {
+    setAuthMode(mode);
+    authBackdrop.hidden = false;
+    document.body.classList.add("auth-open");
+    (mode === "create" ? authName : authEmail).focus();
+  }
+
+  function closeAuth() {
+    authBackdrop.hidden = true;
+    document.body.classList.remove("auth-open");
+    authForm.reset();
+    authMessage.textContent = "";
+  }
+
+  function getStoredAccount() {
+    try {
+      return JSON.parse(localStorage.getItem(ACCOUNT_KEY) || "null");
+    } catch {
+      return null;
+    }
+  }
+
+  signInBtn?.addEventListener("click", () => openAuth("signin"));
+  createAccountBtn?.addEventListener("click", () => openAuth("create"));
+  authCloseBtn?.addEventListener("click", closeAuth);
+  signInTab?.addEventListener("click", () => setAuthMode("signin"));
+  createAccountTab?.addEventListener("click", () => setAuthMode("create"));
+  authBackdrop?.addEventListener("click", event => {
+    if (event.target === authBackdrop) closeAuth();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && authBackdrop && !authBackdrop.hidden) closeAuth();
+  });
+
+  authForm?.addEventListener("submit", event => {
+    event.preventDefault();
+    const email = authEmail.value.trim().toLowerCase();
+    const password = authPassword.value;
+
+    if (authMode === "create") {
+      const name = authName.value.trim();
+      try {
+        localStorage.setItem(ACCOUNT_KEY, JSON.stringify({ name, email, password }));
+        localStorage.setItem(SESSION_KEY, JSON.stringify({ name, email }));
+        authMessage.textContent = "Account created. You are now signed in.";
+        authMessage.className = "auth-message success";
+      } catch {
+        authMessage.textContent = "Unable to save the account in this browser.";
+        authMessage.className = "auth-message error";
+      }
+      return;
+    }
+
+    const account = getStoredAccount();
+    if (!account || account.email !== email || account.password !== password) {
+      authMessage.textContent = "Email or password is incorrect. Create an account first if needed.";
+      authMessage.className = "auth-message error";
+      return;
+    }
+
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ name: account.name, email: account.email }));
+      authMessage.textContent = `Welcome back, ${account.name}.`;
+      authMessage.className = "auth-message success";
+    } catch {
+      authMessage.textContent = "Signed in for this session.";
+      authMessage.className = "auth-message success";
+    }
+  });
 
   // ============================================================
   // SEARCH HISTORY — READ / WRITE / VALIDATE
@@ -259,10 +367,6 @@ The visual appearance is controlled by style.css.
     const sections = $$(".info-section");
     sections.forEach(section => section.classList.add("hidden"));
     document.body.classList.remove("history-view");
-    document.body.classList.remove("info-view");
-    [...home.children].forEach(child => {
-      child.style.display = "";
-    });
 
     if (sectionId === "home") {
       home.style.display = "";
@@ -273,15 +377,11 @@ The visual appearance is controlled by style.css.
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       home.style.display = "block";
-      document.body.classList.add("info-view");
       const page = document.getElementById(sectionId);
       if (page) {
-        [...home.children].forEach(child => {
-          child.style.display = "none";
-        });
+        // Hide the regular home content while showing an info page.
         sections.forEach(section => section.classList.add("hidden"));
         page.classList.remove("hidden");
-        page.style.display = "block";
         page.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
